@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -33,24 +34,25 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        HandleRotation();
-        HandleAcceleration();
+        Vector2 inputVector = GameInputManager.Instance.GetNormalizedInputVector();
+        HandleRotation(inputVector);
+        HandleAcceleration(inputVector);
         Move();
     }
 
-    private void HandleRotation()
+    private void HandleRotation(Vector2 inputVector)
     {
-        if (Input.GetKey(KeyCode.A))
+        if (inputVector.x < 0)
         {
             rotation -= 2 * Time.deltaTime * rotationSpeed;
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (inputVector.x > 0)
         {
             rotation += 2 * Time.deltaTime * rotationSpeed;
         }
 
-        if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        if (inputVector.x == 0)
         {
             if (rotation > 0)
             {
@@ -76,19 +78,19 @@ public class Player : MonoBehaviour
         rotation = Mathf.Clamp(rotation, -maxRotation, maxRotation);
     }
 
-    private void HandleAcceleration()
+    private void HandleAcceleration(Vector2 inputVector)
     {
-        if (Input.GetKey(KeyCode.W))
+        if (inputVector.y > 0)
         {
             speed += 2 * Time.deltaTime * accelerationSpeed;
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (inputVector.y < 0)
         {
             speed -= 2 * Time.deltaTime * accelerationSpeed;
         }
 
-        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
+        if (inputVector.y == 0)
         {
             if (speed > defaultSpeed)
             {

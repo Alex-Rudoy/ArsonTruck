@@ -22,6 +22,9 @@ public class Car : MonoBehaviour
     [SerializeField]
     private ParticleSystem[] explosions;
 
+    [SerializeField]
+    private SoundEffectsSO carExplosionSFXSO;
+
     public int damageToPlayerOnCollision
     {
         get => _damageToPlayerOnCollision;
@@ -67,6 +70,7 @@ public class Car : MonoBehaviour
 
     public async void Explode()
     {
+        SoundManager.Instance.PlaySound(carExplosionSFXSO.audioClips, transform.position);
         gameObject.GetComponent<BoxCollider>().enabled = false;
         foreach (ParticleSystem explosion in explosions)
         {
