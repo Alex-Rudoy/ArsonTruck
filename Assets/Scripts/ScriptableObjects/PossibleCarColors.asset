@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d873ff255e494c2a8c7838a0a3bb8c9, type: 3}
+  m_Name: PossibleCarColors
+  m_EditorClassIdentifier: 
+  carMaterials:
+  - {fileID: -1580535799172915004, guid: 3541ff58d48a24057b7d6e1aa9d273a2, type: 3}
+  - {fileID: -4018286686147086024, guid: 3541ff58d48a24057b7d6e1aa9d273a2, type: 3}
+  - {fileID: -6461824897044041179, guid: 3541ff58d48a24057b7d6e1aa9d273a2, type: 3}
+  - {fileID: 2926557707537190794, guid: 3541ff58d48a24057b7d6e1aa9d273a2, type: 3}
+  - {fileID: -7255647052170860681, guid: 3541ff58d48a24057b7d6e1aa9d273a2, type: 3}
+  - {fileID: -5243988174349660497, guid: 3541ff58d48a24057b7d6e1aa9d273a2, type: 3}
+  - {fileID: -5932453280126202920, guid: 3541ff58d48a24057b7d6e1aa9d273a2, type: 3}
+  - {fileID: 2134453988901106103, guid: 3541ff58d48a24057b7d6e1aa9d273a2, type: 3}
+  - {fileID: 824495196916725104, guid: 3541ff58d48a24057b7d6e1aa9d273a2, type: 3}
+  - {fileID: -91986665691257589, guid: 3541ff58d48a24057b7d6e1aa9d273a2, type: 3}
+  - {fileID: -4973734387028869240, guid: 3541ff58d48a24057b7d6e1aa9d273a2, type: 3}
+  - {fileID: -382652638819485698, guid: 3541ff58d48a24057b7d6e1aa9d273a2, type: 3}
+  - {fileID: -6727086725118381721, guid: 3541ff58d48a24057b7d6e1aa9d273a2, type: 3}
+  - {fileID: -8848810374240701247, guid: 3541ff58d48a24057b7d6e1aa9d273a2, type: 3}
+  - {fileID: -2653651044934150266, guid: 3541ff58d48a24057b7d6e1aa9d273a2, type: 3}
+  - {fileID: -1977067915639666266, guid: 3541ff58d48a24057b7d6e1aa9d273a2, type: 3}
