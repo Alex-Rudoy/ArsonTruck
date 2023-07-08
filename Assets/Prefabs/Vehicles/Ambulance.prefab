@@ -1172,6 +1172,7 @@ MonoBehaviour:
   explosions:
   - {fileID: 7544781998591860136}
   - {fileID: 2211396712846731412}
+  carExplosionSFXSO: {fileID: 11400000, guid: 2406d61763e7e450a8406b825f7a5a87, type: 2}
 --- !u!114 &-2858247780155812553
 MonoBehaviour:
   m_ObjectHideFlags: 0
