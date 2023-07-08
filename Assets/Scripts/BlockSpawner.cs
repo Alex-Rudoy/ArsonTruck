@@ -5,6 +5,7 @@ using UnityEngine;
 public class BlockSpawner : MonoBehaviour
 {
     public GameObject roadPrefab;
+    public GameObject crossroadPrefab;
 
     private List<GameObject> roadBlocks = new List<GameObject>();
 
@@ -23,8 +24,18 @@ public class BlockSpawner : MonoBehaviour
 
     private void UpdateRoadBlocks(object sender, Player.OnMilestoneReachedEventArgs e)
     {
-        CreateNewRoadBlock(e.milestone);
+        if (e.milestone % 6 == 0)
+        {
+            CreateNewCrossroad(e.milestone);
+            SpawnLeftCars(e.milestone);
+            SpawnRightCars(e.milestone);
+        }
+        else
+        {
+            CreateNewRoadBlock(e.milestone);
+        }
         SpawnForwardCars(e.milestone);
+        SpawnBackCars(e.milestone);
         RemoveOldRoadBlock();
     }
 
@@ -32,6 +43,16 @@ public class BlockSpawner : MonoBehaviour
     {
         GameObject newRoadBlock = Instantiate(
             roadPrefab,
+            new Vector3(0, 0, 30 + milestone * 30),
+            Quaternion.identity
+        );
+        roadBlocks.Add(newRoadBlock);
+    }
+
+    private void CreateNewCrossroad(int milestone)
+    {
+        GameObject newRoadBlock = Instantiate(
+            crossroadPrefab,
             new Vector3(0, 0, 30 + milestone * 30),
             Quaternion.identity
         );
@@ -50,6 +71,21 @@ public class BlockSpawner : MonoBehaviour
                 Quaternion.identity
             );
         }
+    }
+
+    private void SpawnBackCars(int milestone)
+    {
+        // todo
+    }
+
+    private void SpawnLeftCars(int milestone)
+    {
+        // todo
+    }
+
+    private void SpawnRightCars(int milestone)
+    {
+        // todo
     }
 
     private void RemoveOldRoadBlock()
