@@ -8,6 +8,7 @@ public class PlayerCollider : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent<Car>(out Car car))
         {
+            gameObject.GetComponent<HP>().TakeDamage(car.damageToPlayerOnCollision);
             car.Explode();
         }
     }

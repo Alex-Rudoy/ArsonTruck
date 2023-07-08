@@ -17,7 +17,15 @@ public class Car : MonoBehaviour
     private CarColorsSO possibleCarColors;
 
     [SerializeField]
+    private int _damageToPlayerOnCollision;
+
+    [SerializeField]
     private ParticleSystem[] explosions;
+
+    public int damageToPlayerOnCollision
+    {
+        get => _damageToPlayerOnCollision;
+    }
 
     private void Start()
     {
@@ -30,7 +38,7 @@ public class Car : MonoBehaviour
     {
         var materials = meshRenderer.materials;
 
-        if (materials.Length == 0)
+        if (!possibleCarColors)
             return;
 
         materials[0] = possibleCarColors.carMaterials[

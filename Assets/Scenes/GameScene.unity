@@ -186,7 +186,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 255468825}
-  m_LocalRotation: {x: 0.5847103, y: -0.000000019740359, z: 0.0000000142280445, w: 0.8112422}
+  m_LocalRotation: {x: 0.5847103, y: 0.000000019740355, z: -0.000000014228043, w: 0.8112422}
   m_LocalPosition: {x: 2.5, y: 30, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -281,7 +281,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.5847103, y: -0.000000019740359, z: 0.0000000142280445, w: 0.8112422}
+  m_LocalRotation: {x: 0.5847103, y: 0.000000019740355, z: -0.000000014228043, w: 0.8112422}
   m_LocalPosition: {x: 2.5, y: 30, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -667,6 +667,7 @@ MonoBehaviour:
   - {fileID: 1960038600542738631, guid: 79cf13d638cbb4b13963cc14884bc428, type: 3}
   - {fileID: 8129649895683173415, guid: 21b7e509fb34744e6a50915f192b33cf, type: 3}
   - {fileID: 7953136037248777618, guid: beda7c5c4c3f94bd4a2c0d0042bdbb5c, type: 3}
+  - {fileID: 9196350689697671952, guid: a4d6ef9c865a741d9b8ee33f4f12afd9, type: 3}
 --- !u!4 &1551201022
 Transform:
   m_ObjectHideFlags: 0
@@ -781,6 +782,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1014885807864440755, guid: 4578ddb460c494c17b9a927bb5fa0a66,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1063780546292771817, guid: 4578ddb460c494c17b9a927bb5fa0a66,
         type: 3}
       propertyPath: carDestroyer

@@ -20,14 +20,16 @@ public class Player : MonoBehaviour
     private const float maxRotation = 30;
 
     private float speed = 20;
+    public float Speed
+    {
+        get { return speed; }
+    }
     private const float accelerationSpeed = 10;
     private const float minSpeed = 10;
     private const float defaultSpeed = 20;
     private const float maxSpeed = 30;
 
     private int milestone = 0;
-
-    private void Start() { }
 
     private void Update()
     {

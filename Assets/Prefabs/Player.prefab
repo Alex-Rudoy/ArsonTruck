@@ -125,6 +125,7 @@ Transform:
   - {fileID: 8705330264826840029}
   - {fileID: 8441477288740643951}
   - {fileID: 2444224188923043601}
+  - {fileID: 3150346530377692088}
   m_Father: {fileID: 1733589274228066394}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -195,6 +196,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Light1: {fileID: 8768358569072381909}
   Light2: {fileID: 5059781117231579933}
+--- !u!1 &703478563254848140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3150346530377692088}
+  m_Layer: 0
+  m_Name: FlameThrower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3150346530377692088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703478563254848140}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.00346, z: 0.02633}
+  m_LocalScale: {x: 0.01, y: 0.009999997, z: 0.009999997}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4658171154016117091}
+  m_Father: {fileID: 6491620292587489090}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2768590488194462011
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +514,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &5186567240736997700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4658171154016117091}
+  m_Layer: 0
+  m_Name: EmissionPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4658171154016117091
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5186567240736997700}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3150346530377692088}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6781150201622290052
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,6 +759,8 @@ GameObject:
   - component: {fileID: 3865455123494381895}
   - component: {fileID: 1014885807864440755}
   - component: {fileID: 1563430892752073896}
+  - component: {fileID: 5504337284471850954}
+  - component: {fileID: 245829136617787505}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -762,8 +828,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.1198697, y: 3.0071988, z: 7.5485935}
-  m_Center: {x: 0.0048483014, y: 1.0035996, z: 0.055095673}
+  m_Size: {x: 2.1198697, y: 1.4030995, z: 7.5485935}
+  m_Center: {x: 0.004848242, y: 0.2015503, z: 0.055095673}
 --- !u!54 &1563430892752073896
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -786,11 +852,41 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5504337284471850954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6928616063591906142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315d59545f3054c82adf118167651a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flameThrower: {fileID: 3150346530377692088}
+  emissionPoint: {fileID: 4658171154016117091}
+  projectilePrefab: {fileID: 2523181708302229072, guid: 37bd62e371ac449708caaaa481449278,
+    type: 3}
+  fireRate: 200
+--- !u!114 &245829136617787505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6928616063591906142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1a6f36a8e7a4e7699841f37e4a8009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
 --- !u!1 &7083879525693684306
 GameObject:
   m_ObjectHideFlags: 0
