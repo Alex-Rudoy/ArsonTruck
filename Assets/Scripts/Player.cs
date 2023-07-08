@@ -5,6 +5,9 @@ using System;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
+    private CarDestroyer carDestroyer;
+
     public static event EventHandler<OnMilestoneReachedEventArgs> OnMilestoneReached;
 
     public class OnMilestoneReachedEventArgs : EventArgs
@@ -111,5 +114,7 @@ public class Player : MonoBehaviour
                 new OnMilestoneReachedEventArgs { milestone = (int)milestone }
             );
         }
+
+        carDestroyer.transform.position = new Vector3(0, 0, transform.position.z - 30);
     }
 }

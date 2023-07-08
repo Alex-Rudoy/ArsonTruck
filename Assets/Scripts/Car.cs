@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class Car : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class Car : MonoBehaviour
     [SerializeField]
     private CarColorsSO possibleCarColors;
 
+    [SerializeField]
+    private ParticleSystem[] explosions;
+
     private void Start()
     {
         maxSpeed += Random.Range(-2, 2);
@@ -25,6 +29,10 @@ public class Car : MonoBehaviour
     private void setRandomCarColor()
     {
         var materials = meshRenderer.materials;
+
+        if (materials.Length == 0)
+            return;
+
         materials[0] = possibleCarColors.carMaterials[
             Random.Range(0, possibleCarColors.carMaterials.Length)
         ];
@@ -47,5 +55,18 @@ public class Car : MonoBehaviour
 
         speed -= Time.deltaTime * (rayLength - hit.distance) * 0.5f;
         speed = Mathf.Clamp(speed, 0, maxSpeed);
+    }
+
+    public async void Explode()
+    {
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        foreach (ParticleSystem explosion in explosions)
+        {
+            explosion.Play();
+        }
+        await Task.Delay(300);
+        meshRenderer.enabled = false;
+        await Task.Delay(200);
+        Destroy(gameObject);
     }
 }

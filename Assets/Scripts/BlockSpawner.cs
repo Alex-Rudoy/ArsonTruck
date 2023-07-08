@@ -75,17 +75,48 @@ public class BlockSpawner : MonoBehaviour
 
     private void SpawnBackCars(int milestone)
     {
-        // todo
+        if (milestone % 3 == 0)
+        {
+            float randomLane = Random.Range(0, 2);
+            GameObject newCar = Instantiate(
+                carPrefabs[Random.Range(0, carPrefabs.Length)],
+                new Vector3(-2.5f - randomLane * 5, 0, 15 + milestone * 30 + Random.Range(0, 60)),
+                Quaternion.identity
+            );
+            newCar.transform.Rotate(0, 180, 0);
+        }
     }
 
     private void SpawnLeftCars(int milestone)
     {
-        // todo
+        // spawn cars that go from left to right on the upcoming crossroad prefab
+
+        int randomAmountOfCars = Random.Range(2, 4);
+        for (int i = 0; i < randomAmountOfCars; i++)
+        {
+            float randomLane = Random.Range(0, 2);
+            GameObject newCar = Instantiate(
+                carPrefabs[Random.Range(0, carPrefabs.Length)],
+                new Vector3(Random.Range(0, -80), 0, 30 + milestone * 30 - 2.5f - randomLane * 5),
+                Quaternion.identity
+            );
+            newCar.transform.Rotate(0, 90, 0);
+        }
     }
 
     private void SpawnRightCars(int milestone)
     {
-        // todo
+        int randomAmountOfCars = Random.Range(2, 4);
+        for (int i = 0; i < randomAmountOfCars; i++)
+        {
+            float randomLane = Random.Range(0, 2);
+            GameObject newCar = Instantiate(
+                carPrefabs[Random.Range(0, carPrefabs.Length)],
+                new Vector3(Random.Range(0, 80), 0, 30 + milestone * 30 + 2.5f + randomLane * 5),
+                Quaternion.identity
+            );
+            newCar.transform.Rotate(0, -90, 0);
+        }
     }
 
     private void RemoveOldRoadBlock()
