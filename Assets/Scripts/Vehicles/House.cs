@@ -19,6 +19,9 @@ public class House : MonoBehaviour
     }
 
     [SerializeField]
+    private CarHP carHPUI;
+
+    [SerializeField]
     private ParticleSystem[] explosions;
 
     [SerializeField]
@@ -33,6 +36,10 @@ public class House : MonoBehaviour
     private void Start()
     {
         gameObject.GetComponent<HP>().OnDeath += HandleDeath;
+        foreach (ParticleSystem fire in fireParticles)
+        {
+            fire.Stop();
+        }
     }
 
     private void OnDestroy()
@@ -50,11 +57,18 @@ public class House : MonoBehaviour
         onHouseShotDown?.Invoke(this, new onHouseShotDownEventArgs(scoreBonusForKill));
 
         SoundManager.Instance.PlaySound(carExplosionSFXSO.audioClips, transform.position);
-        gameObject.GetComponent<BoxCollider>().enabled = false;
 
-        // foreach (ParticleSystem explosion in explosions)
-        // {
-        //     explosion.Play();
-        // }
+        gameObject.GetComponent<Collider>().enabled = false;
+        carHPUI.enabled = false;
+
+        foreach (ParticleSystem explosion in explosions)
+        {
+            explosion.Play();
+        }
+
+        foreach (ParticleSystem fire in fireParticles)
+        {
+            fire.Play();
+        }
     }
 }

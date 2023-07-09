@@ -34,7 +34,7 @@ public class PoliceCar : MonoBehaviour
     private float timeToNextBullet = 0;
     private float timeBetweenBullets = 0.5f;
 
-    private float timeToNextShout = 0;
+    private float timeToNextShout = 4f;
     private float timeBetweenShouts = 5f;
 
     private void Start()

@@ -74,6 +74,7 @@ public class Player : MonoBehaviour
         }
         Instance = this;
         Car.onCarShotDown += HandleCarShotDown;
+        House.onHouseShotDown += HandleHouseShotDown;
         PlayerControls.OnMilestoneReached += HandleMilestoneReached;
         gameObject.GetComponent<HP>().OnHPChange += HandleHpChange;
         GameOverUI.onRestartClick += HandleRestartClick;
@@ -125,6 +126,11 @@ public class Player : MonoBehaviour
         fuel += e.fuelBonusForKill;
         onPlayerFuelChange?.Invoke(this, new onPlayerFuelChangeEventArgs(fuel));
         gameObject.GetComponent<HP>().Heal(e.hpBonusForKill);
+    }
+
+    private void HandleHouseShotDown(object sender, House.onHouseShotDownEventArgs e)
+    {
+        AddScore(e.scoreBonusForKill);
     }
 
     private void HandleMilestoneReached(object sender, PlayerControls.OnMilestoneReachedEventArgs e)
