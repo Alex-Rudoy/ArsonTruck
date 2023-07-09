@@ -851,7 +851,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 95971c10df4b4424ab535ad3c7a5c0be, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -897,7 +897,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.8
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -949,8 +949,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf11841118bdf441284adf077311b409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  policemanShoutsSFXSO: {fileID: 0}
-  policeGunSFXSO: {fileID: 0}
+  policemanShoutsSFXSO: {fileID: 11400000, guid: 5bd3b61247f524d1991b261e1bb6e6d1,
+    type: 2}
+  policeGunSFXSO: {fileID: 11400000, guid: 449908bad0e9d49509311dd3afbb3655, type: 2}
   carExplosionSFXSO: {fileID: 11400000, guid: 2406d61763e7e450a8406b825f7a5a87, type: 2}
   explosions:
   - {fileID: 3746681879153806145}

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f8d258a7d40459ea79c7d74ab040c9, type: 3}
+  m_Name: PoliceShoutsSO
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: fd49e35fd7885458f8e94d4214336726, type: 3}
+  - {fileID: 8300000, guid: e97e279077b3a4f7da188975bf043210, type: 3}
+  - {fileID: 8300000, guid: 9f53f0f04181242f19e92ef9b086b1f3, type: 3}
+  - {fileID: 8300000, guid: a453a8858c9b5421e8c18c214105ef97, type: 3}
+  - {fileID: 8300000, guid: efc4c6ca9f82b472a8f87a6e5fb9bd63, type: 3}
+  - {fileID: 8300000, guid: 772f9535f3dce48c3912f1842a54c402, type: 3}
+  - {fileID: 8300000, guid: 4d1d53a4164f24091bb89f02fcf40c75, type: 3}

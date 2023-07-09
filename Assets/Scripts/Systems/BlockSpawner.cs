@@ -19,7 +19,7 @@ public class BlockSpawner : MonoBehaviour
 
     private GameObject roadBlockParent;
 
-    private int milestoneToSpawnPoliceCar = 10;
+    private int milestoneToSpawnPoliceCar;
 
     private void Start()
     {
@@ -66,6 +66,7 @@ public class BlockSpawner : MonoBehaviour
         {
             CreateNewRoadBlock(i);
         }
+        milestoneToSpawnPoliceCar = 10;
     }
 
     private void UpdateRoadBlocks(object sender, PlayerControls.OnMilestoneReachedEventArgs e)

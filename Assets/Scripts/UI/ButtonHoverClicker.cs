@@ -18,7 +18,7 @@ public class ButtonHoverClicker : MonoBehaviour, IPointerEnterHandler, IPointerE
         defaultColor = GetComponent<Image>().color;
         GetComponent<Button>().onClick.AddListener(() =>
         {
-            SoundManager.Instance.PlaySound(clickSound.audioClips, Vector3.zero, 0);
+            SoundManager.Instance.PlaySound(clickSound.audioClips, Vector3.zero, 0, 0.7f);
         });
         ;
     }
@@ -26,7 +26,7 @@ public class ButtonHoverClicker : MonoBehaviour, IPointerEnterHandler, IPointerE
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
         GetComponent<Image>().color = new Color(0.6823529f, 0.3686275f, 0.3568628f, 1);
-        SoundManager.Instance.PlaySound(hoverSound.audioClips, Vector3.zero, 0);
+        SoundManager.Instance.PlaySound(hoverSound.audioClips, Vector3.zero, 0, 0.3f);
     }
 
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)

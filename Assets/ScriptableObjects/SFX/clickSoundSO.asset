@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f8d258a7d40459ea79c7d74ab040c9, type: 3}
   m_Name: clickSoundSO
   m_EditorClassIdentifier: 
-  audioClips: []
+  audioClips:
+  - {fileID: 8300000, guid: ba0811aed72574df48d73c3d03eca953, type: 3}

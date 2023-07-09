@@ -32,7 +32,7 @@ public class SoundManager : MonoBehaviour
         tempGameObject.transform.position = pos;
         AudioSource audioSource = tempGameObject.AddComponent<AudioSource>();
         audioSource.volume = volume;
-        audioSource.spatialBlend = 0.2f;
+        audioSource.spatialBlend = 0.5f;
         audioSource.clip = clip;
         audioSource.Play();
         Destroy(tempGameObject, clip.length);
