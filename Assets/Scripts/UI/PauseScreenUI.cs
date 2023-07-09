@@ -14,18 +14,8 @@ public class PauseScreenUI : MonoBehaviour
     private Button mainMenuButton;
 
     public static event EventHandler onResumeClick;
-    public static event EventHandler onOptionsClick;
 
-    private static bool _isPaused = false;
-    public static bool isPaused
-    {
-        get => _isPaused;
-        private set
-        {
-            _isPaused = value;
-            Time.timeScale = _isPaused ? 0 : 1;
-        }
-    }
+    private static bool isPaused = false;
 
     private void Awake()
     {
@@ -48,7 +38,11 @@ public class PauseScreenUI : MonoBehaviour
 
     private void TogglePause(object sender, System.EventArgs e)
     {
+        if (GameOverUI.IsGameOver)
+            return;
+
         isPaused = !isPaused;
+        Time.timeScale = isPaused ? 0 : 1;
         ui.SetActive(isPaused);
     }
 }

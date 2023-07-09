@@ -492,6 +492,8 @@ MonoBehaviour:
   - {fileID: 916013477025892139}
   - {fileID: 299544913507619688}
   carExplosionSFXSO: {fileID: 11400000, guid: 2406d61763e7e450a8406b825f7a5a87, type: 2}
+  fuelBonusForKill: 15
+  hpBonusForKill: 0
 --- !u!65 &2935490154241025526
 BoxCollider:
   m_ObjectHideFlags: 0

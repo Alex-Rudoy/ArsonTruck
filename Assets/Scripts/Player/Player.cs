@@ -1,124 +1,125 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    private CarDestroyer carDestroyer;
+    public static event EventHandler<onPlayerHPChangeEventArgs> onPlayerHPChange;
 
-    public static event EventHandler<OnMilestoneReachedEventArgs> OnMilestoneReached;
-
-    public class OnMilestoneReachedEventArgs : EventArgs
+    public class onPlayerHPChangeEventArgs : EventArgs
     {
-        public int milestone;
+        public int HP;
+
+        public onPlayerHPChangeEventArgs(int HP)
+        {
+            this.HP = HP;
+        }
     }
 
-    private float rotation = 0;
-    private const float rotationSpeed = 40;
-    private const float maxRotation = 30;
+    public static event EventHandler<onPlayerFuelChangeEventArgs> onPlayerFuelChange;
 
-    private float speed = 20;
-    public float Speed
+    public class onPlayerFuelChangeEventArgs : EventArgs
     {
-        get { return speed; }
-    }
-    private const float accelerationSpeed = 10;
-    private const float minSpeed = 10;
-    private const float defaultSpeed = 20;
-    private const float maxSpeed = 30;
+        public float fuel;
 
-    private int milestone = 0;
+        public onPlayerFuelChangeEventArgs(float fuel)
+        {
+            this.fuel = fuel;
+        }
+    }
+
+    public static event EventHandler<onScoreChangeEventArgs> onScoreChange;
+
+    public class onScoreChangeEventArgs : EventArgs
+    {
+        public int score;
+
+        public onScoreChangeEventArgs(int score)
+        {
+            this.score = score;
+        }
+    }
+
+    public static event EventHandler<onGameOverEventArgs> onGameOver;
+
+    public class onGameOverEventArgs : EventArgs
+    {
+        public string message;
+        public int score;
+
+        public onGameOverEventArgs(string message, int score)
+        {
+            this.message = message;
+            this.score = score;
+        }
+    }
+
+    private float fuel;
+
+    private int score;
+
+    public int Score
+    {
+        get => score;
+    }
+
+    private void Start()
+    {
+        Car.onCarShotDown += HandleCarShotDown;
+        PlayerControls.OnMilestoneReached += HandleMilestoneReached;
+        gameObject.GetComponent<HP>().OnHPChange += HandleHpChange;
+        GameOverUI.onRestartClick += HandleRestartClick;
+        ResetValues();
+    }
+
+    private void HandleRestartClick(object sender, System.EventArgs e)
+    {
+        ResetValues();
+    }
+
+    private void ResetValues()
+    {
+        fuel = 100;
+        score = 0;
+        gameObject.GetComponent<HP>().ResetHP();
+    }
 
     private void Update()
     {
-        Vector2 inputVector = GameInputManager.Instance.GetNormalizedInputVector();
-        HandleRotation(inputVector);
-        HandleAcceleration(inputVector);
-        Move();
+        fuel -= Time.deltaTime * 5;
+        onPlayerFuelChange?.Invoke(this, new onPlayerFuelChangeEventArgs(fuel));
+
+        if (fuel <= 0)
+        {
+            onGameOver?.Invoke(this, new onGameOverEventArgs("Out of fuel!", score));
+        }
     }
 
-    private void HandleRotation(Vector2 inputVector)
+    private void HandleHpChange(object sender, HP.OnHPChangeEventArgs e)
     {
-        if (inputVector.x < 0)
+        onPlayerHPChange?.Invoke(this, new onPlayerHPChangeEventArgs(e.HP));
+        if (e.HP <= 0)
         {
-            rotation -= 2 * Time.deltaTime * rotationSpeed;
+            onGameOver?.Invoke(this, new onGameOverEventArgs("You died!", score));
         }
-
-        if (inputVector.x > 0)
-        {
-            rotation += 2 * Time.deltaTime * rotationSpeed;
-        }
-
-        if (inputVector.x == 0)
-        {
-            if (rotation > 0)
-            {
-                rotation -= 1 * Time.deltaTime * rotationSpeed;
-            }
-
-            if (rotation < 0)
-            {
-                rotation += 1 * Time.deltaTime * rotationSpeed;
-            }
-        }
-
-        if (transform.position.x > 13 && rotation > 0)
-        {
-            rotation -= 5 * Time.deltaTime * rotationSpeed;
-        }
-
-        if (transform.position.x < -13 && rotation < 0)
-        {
-            rotation += 5 * Time.deltaTime * rotationSpeed;
-        }
-
-        rotation = Mathf.Clamp(rotation, -maxRotation, maxRotation);
     }
 
-    private void HandleAcceleration(Vector2 inputVector)
+    private void HandleCarShotDown(object sender, Car.OnCarShotDownEventArgs e)
     {
-        if (inputVector.y > 0)
-        {
-            speed += 2 * Time.deltaTime * accelerationSpeed;
-        }
-
-        if (inputVector.y < 0)
-        {
-            speed -= 2 * Time.deltaTime * accelerationSpeed;
-        }
-
-        if (inputVector.y == 0)
-        {
-            if (speed > defaultSpeed)
-            {
-                speed -= 1 * Time.deltaTime * accelerationSpeed;
-            }
-
-            if (speed < defaultSpeed)
-            {
-                speed += 1 * Time.deltaTime * accelerationSpeed;
-            }
-        }
-
-        speed = Mathf.Clamp(speed, minSpeed, maxSpeed);
+        fuel += e.fuelBonusForKill;
+        onPlayerFuelChange?.Invoke(this, new onPlayerFuelChangeEventArgs(fuel));
+        gameObject.GetComponent<HP>().Heal(e.hpBonusForKill);
     }
 
-    private void Move()
+    private void HandleMilestoneReached(object sender, PlayerControls.OnMilestoneReachedEventArgs e)
     {
-        transform.rotation = Quaternion.Euler(0, rotation, 0);
-        transform.position += transform.forward * Time.deltaTime * speed;
-        if (transform.position.z > milestone * 30)
-        {
-            milestone++;
-            OnMilestoneReached(
-                this,
-                new OnMilestoneReachedEventArgs { milestone = (int)milestone }
-            );
-        }
+        AddScore(1);
+    }
 
-        carDestroyer.transform.position = new Vector3(0, 0, transform.position.z - 30);
+    public void AddScore(int scoreToAdd)
+    {
+        score += scoreToAdd;
+        onScoreChange?.Invoke(this, new onScoreChangeEventArgs(score));
     }
 }

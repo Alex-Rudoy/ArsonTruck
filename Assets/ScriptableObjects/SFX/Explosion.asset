@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f8d258a7d40459ea79c7d74ab040c9, type: 3}
   m_Name: Explosion
   m_EditorClassIdentifier: 
-  audioClips: []
+  audioClips:
+  - {fileID: 8300000, guid: c0360c148a0e6471893704fe992786cb, type: 3}
+  - {fileID: 8300000, guid: 981df03fac9b34a8299de8d1f1f10177, type: 3}
+  - {fileID: 8300000, guid: 3cd154d3521bc4d96ab553395f610893, type: 3}
+  - {fileID: 8300000, guid: fbdafc457621b484ab78e9283f1767c5, type: 3}

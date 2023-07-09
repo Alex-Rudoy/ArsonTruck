@@ -2,9 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using System;
 
 public class Car : MonoBehaviour
 {
+    public static event EventHandler<OnCarShotDownEventArgs> onCarShotDown;
+
+    public class OnCarShotDownEventArgs : EventArgs
+    {
+        public int fuelBonusForKill;
+        public int hpBonusForKill;
+
+        public OnCarShotDownEventArgs(int fuelBonusForKill, int hpBonusForKill)
+        {
+            this.fuelBonusForKill = fuelBonusForKill;
+            this.hpBonusForKill = hpBonusForKill;
+        }
+    }
+
     [SerializeField]
     private float maxSpeed;
 
@@ -25,6 +40,12 @@ public class Car : MonoBehaviour
     [SerializeField]
     private SoundEffectsSO carExplosionSFXSO;
 
+    [SerializeField]
+    private int fuelBonusForKill;
+
+    [SerializeField]
+    private int hpBonusForKill;
+
     public int damageToPlayerOnCollision
     {
         get => _damageToPlayerOnCollision;
@@ -32,7 +53,7 @@ public class Car : MonoBehaviour
 
     private void Start()
     {
-        maxSpeed += Random.Range(-2, 2);
+        maxSpeed += UnityEngine.Random.Range(-2, 2);
         speed = maxSpeed;
         setRandomCarColor();
     }
@@ -45,7 +66,7 @@ public class Car : MonoBehaviour
             return;
 
         materials[0] = possibleCarColors.carMaterials[
-            Random.Range(0, possibleCarColors.carMaterials.Length)
+            UnityEngine.Random.Range(0, possibleCarColors.carMaterials.Length)
         ];
         meshRenderer.materials = materials;
     }
@@ -68,17 +89,34 @@ public class Car : MonoBehaviour
         speed = Mathf.Clamp(speed, 0, maxSpeed);
     }
 
-    public async void Explode()
+    public async void Explode(bool isShotDown = false)
     {
+        if (isShotDown)
+        {
+            onCarShotDown?.Invoke(
+                this,
+                new OnCarShotDownEventArgs(fuelBonusForKill, hpBonusForKill)
+            );
+        }
+
         SoundManager.Instance.PlaySound(carExplosionSFXSO.audioClips, transform.position);
         gameObject.GetComponent<BoxCollider>().enabled = false;
+
         foreach (ParticleSystem explosion in explosions)
         {
             explosion.Play();
         }
+
         await Task.Delay(300);
+
+        if (meshRenderer == null)
+            return;
         meshRenderer.enabled = false;
+
         await Task.Delay(200);
+
+        if (gameObject == null)
+            return;
         Destroy(gameObject);
     }
 }

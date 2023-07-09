@@ -47,7 +47,8 @@ public class PlayerShooting : MonoBehaviour
             emissionPoint.position,
             flameThrower.rotation
         );
-        var playerMovementVector = transform.forward * gameObject.GetComponent<Player>().Speed;
+        var playerMovementVector =
+            transform.forward * gameObject.GetComponent<PlayerControls>().Speed;
         var flameThrowerVector = flameThrower.forward * 30;
         projectile
             .GetComponent<Projectile>()
