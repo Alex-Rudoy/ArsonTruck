@@ -33,6 +33,6 @@ public class ScoreUI : MonoBehaviour
     private void ResetScore()
     {
         scoreText.text = $"Score: 0";
-        topScoreText.text = $"Top Score: {PlayerPrefs.GetInt("HighScore", 0)}";
+        topScoreText.text = $"High Score: {PlayerPrefs.GetInt("HighScore", 0)}";
     }
 }
