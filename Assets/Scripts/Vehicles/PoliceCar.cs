@@ -35,7 +35,7 @@ public class PoliceCar : MonoBehaviour
     private float timeBetweenBullets = 0.5f;
 
     private float timeToNextShout = 0;
-    private float timeBetweenShouts = 0.5f;
+    private float timeBetweenShouts = 5f;
 
     private void Start()
     {
@@ -84,7 +84,7 @@ public class PoliceCar : MonoBehaviour
 
         GameObject bullet = Instantiate(bulletPrefab, emissionPoint.position, transform.rotation);
 
-        // todo play sound
+        SoundManager.Instance.PlaySound(policeGunSFXSO.audioClips, transform.position);
     }
 
     private void HandleShouts()
@@ -99,7 +99,7 @@ public class PoliceCar : MonoBehaviour
 
         timeToNextShout -= timeBetweenShouts;
 
-        // todo shout
+        SoundManager.Instance.PlaySound(policemanShoutsSFXSO.audioClips, transform.position);
     }
 
     private void OnTriggerEnter(Collider other)
