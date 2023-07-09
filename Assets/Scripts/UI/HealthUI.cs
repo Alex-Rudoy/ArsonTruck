@@ -18,6 +18,12 @@ public class HealthUI : MonoBehaviour
         ResetHpBar();
     }
 
+    private void OnDestroy()
+    {
+        Player.onPlayerHPChange -= HandlePlayerHPChange;
+        GameOverUI.onRestartClick -= HandleRestartClick;
+    }
+
     private void Update()
     {
         healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, targetHp, Time.deltaTime * 5);

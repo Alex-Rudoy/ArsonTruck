@@ -46,6 +46,11 @@ public class GameOverUI : MonoBehaviour
         previousHighScore = PlayerPrefs.GetInt("HighScore", 0);
     }
 
+    private void OnDestroy()
+    {
+        Player.onGameOver -= HandleGameOver;
+    }
+
     private void HandleGameOver(object sender, Player.onGameOverEventArgs e)
     {
         isGameOver = true;

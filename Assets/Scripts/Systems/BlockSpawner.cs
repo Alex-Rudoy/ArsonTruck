@@ -12,15 +12,28 @@ public class BlockSpawner : MonoBehaviour
     [SerializeField]
     private GameObject[] carPrefabs;
 
+    [SerializeField]
+    private GameObject policeCarPrefab;
+
     private GameObject carParent;
 
     private GameObject roadBlockParent;
+
+    private int milestoneToSpawnPoliceCar = 10;
 
     private void Start()
     {
         GameOverUI.onRestartClick += HandleRestartClick;
         PlayerControls.OnMilestoneReached += UpdateRoadBlocks;
+        PlayerControls.OnPlayerSawPoliceDestroyed += HandlePlayerSawPoliceDestroyed;
         ResetRoads();
+    }
+
+    private void OnDestroy()
+    {
+        GameOverUI.onRestartClick -= HandleRestartClick;
+        PlayerControls.OnMilestoneReached -= UpdateRoadBlocks;
+        PlayerControls.OnPlayerSawPoliceDestroyed -= HandlePlayerSawPoliceDestroyed;
     }
 
     private void HandleRestartClick(object sender, System.EventArgs e)
@@ -70,6 +83,11 @@ public class BlockSpawner : MonoBehaviour
         SpawnForwardCars(e.milestone);
         SpawnBackCars(e.milestone);
         RemoveOldRoadBlock();
+
+        if (e.milestone == milestoneToSpawnPoliceCar)
+        {
+            SpawnPoliceCar(e.milestone);
+        }
     }
 
     private void CreateNewRoadBlock(int milestone)
@@ -158,9 +176,27 @@ public class BlockSpawner : MonoBehaviour
         }
     }
 
+    private void SpawnPoliceCar(int milestone)
+    {
+        GameObject policeCar = Instantiate(
+            policeCarPrefab,
+            new Vector3(0, 0, -90 + milestone * 30 + Random.Range(0, 30)),
+            Quaternion.identity,
+            carParent.transform
+        );
+    }
+
     private void RemoveOldRoadBlock()
     {
         Destroy(roadBlocks[0]);
         roadBlocks.RemoveAt(0);
+    }
+
+    private void HandlePlayerSawPoliceDestroyed(
+        object sender,
+        PlayerControls.OnPlayerSawPoliceDestroyedEventArgs e
+    )
+    {
+        milestoneToSpawnPoliceCar = e.milestone + 3;
     }
 }

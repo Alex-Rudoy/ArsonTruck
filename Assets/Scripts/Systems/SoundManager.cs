@@ -15,19 +15,24 @@ public class SoundManager : MonoBehaviour
         Instance = this;
     }
 
-    public void PlaySound(AudioClip[] audioClips, Vector3 position, float volume = 1f)
+    public void PlaySound(
+        AudioClip[] audioClips,
+        Vector3 position,
+        float spatialBlend = 0.2f,
+        float volume = 1f
+    )
     {
         AudioClip audioClip = audioClips[Random.Range(0, audioClips.Length)];
-        PlayClipAt(audioClip, position, volume);
+        PlayClipAt(audioClip, position, spatialBlend, volume);
     }
 
-    void PlayClipAt(AudioClip clip, Vector3 pos, float volume)
+    void PlayClipAt(AudioClip clip, Vector3 pos, float spatialBlend, float volume)
     {
         GameObject tempGameObject = new GameObject("TempAudio");
         tempGameObject.transform.position = pos;
         AudioSource audioSource = tempGameObject.AddComponent<AudioSource>();
         audioSource.volume = volume;
-        audioSource.spatialBlend = 0.5f;
+        audioSource.spatialBlend = 0.2f;
         audioSource.clip = clip;
         audioSource.Play();
         Destroy(tempGameObject, clip.length);

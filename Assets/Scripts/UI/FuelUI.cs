@@ -18,6 +18,12 @@ public class FuelUI : MonoBehaviour
         ResetFuelBar();
     }
 
+    private void OnDestroy()
+    {
+        Player.onPlayerFuelChange -= HandlePlayerFuelChange;
+        GameOverUI.onRestartClick -= HandleRestartClick;
+    }
+
     private void Update()
     {
         fuelBar.fillAmount = Mathf.Lerp(fuelBar.fillAmount, targetFuel, Time.deltaTime * 5);

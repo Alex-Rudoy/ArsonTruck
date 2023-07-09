@@ -51,7 +51,7 @@ public class PlayerShooting : MonoBehaviour
             transform.forward * gameObject.GetComponent<PlayerControls>().Speed;
         var flameThrowerVector = flameThrower.forward * 30;
         projectile
-            .GetComponent<Projectile>()
+            .GetComponent<FireProjectile>()
             .SetMovementDirection(flameThrowerVector + playerMovementVector / 2);
     }
 }
