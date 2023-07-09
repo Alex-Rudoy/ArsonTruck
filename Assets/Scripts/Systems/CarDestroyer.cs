@@ -10,5 +10,9 @@ public class CarDestroyer : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
+        if (other.gameObject.TryGetComponent<FireProjectile>(out FireProjectile projectile))
+        {
+            Destroy(other.gameObject);
+        }
     }
 }

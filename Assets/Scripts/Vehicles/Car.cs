@@ -51,11 +51,19 @@ public class Car : MonoBehaviour
         get => _damageToPlayerOnCollision;
     }
 
+    private bool toDestroy = false;
+
     private void Start()
     {
+        gameObject.GetComponent<HP>().OnDeath += HandleDeath;
         maxSpeed += UnityEngine.Random.Range(-2, 2);
         speed = maxSpeed;
         setRandomCarColor();
+    }
+
+    private void OnDestroy()
+    {
+        gameObject.GetComponent<HP>().OnDeath -= HandleDeath;
     }
 
     private void setRandomCarColor()
@@ -73,6 +81,11 @@ public class Car : MonoBehaviour
 
     private void Update()
     {
+        if (toDestroy)
+        {
+            Destroy(gameObject);
+            return;
+        }
         float rayLength = 20;
 
         speed += 5 * Time.deltaTime;
@@ -89,7 +102,21 @@ public class Car : MonoBehaviour
         speed = Mathf.Clamp(speed, 0, maxSpeed);
     }
 
-    public async void Explode(bool isShotDown = false)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.TryGetComponent<Car>(out Car car))
+        {
+            Explode();
+            car.Explode();
+        }
+    }
+
+    private void HandleDeath(object sender, EventArgs e)
+    {
+        Explode(true);
+    }
+
+    public void Explode(bool isShotDown = false)
     {
         if (isShotDown)
         {
@@ -107,16 +134,18 @@ public class Car : MonoBehaviour
             explosion.Play();
         }
 
-        await Task.Delay(300);
+        StartCoroutine(ExplodeCoroutine());
+    }
 
+    private IEnumerator ExplodeCoroutine()
+    {
+        yield return new WaitForSeconds(0.3f);
         if (meshRenderer == null)
-            return;
+            yield break;
         meshRenderer.enabled = false;
-
-        await Task.Delay(200);
-
+        yield return new WaitForSeconds(0.2f);
         if (gameObject == null)
-            return;
-        Destroy(gameObject);
+            yield break;
+        toDestroy = true;
     }
 }

@@ -17,9 +17,14 @@ public class CarHP : MonoBehaviour
     [SerializeField]
     private Image Flame3;
 
-    void Start()
+    private void Start()
     {
         carHpComponent.OnHPChange += HandleHPChange;
+    }
+
+    private void OnDestroy()
+    {
+        carHpComponent.OnHPChange -= HandleHPChange;
     }
 
     private void HandleHPChange(object sender, HP.OnHPChangeEventArgs e)

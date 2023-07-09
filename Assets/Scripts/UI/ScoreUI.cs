@@ -20,6 +20,12 @@ public class ScoreUI : MonoBehaviour
         ResetScore();
     }
 
+    private void OnDestroy()
+    {
+        Player.onScoreChange -= HandleScoreChange;
+        GameOverUI.onRestartClick -= HandleRestart;
+    }
+
     private void HandleScoreChange(object sender, Player.onScoreChangeEventArgs e)
     {
         scoreText.text = $"Score: {e.score}";

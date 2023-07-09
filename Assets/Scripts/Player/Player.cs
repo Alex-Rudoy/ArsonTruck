@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance;
+
     public static event EventHandler<onPlayerHPChangeEventArgs> onPlayerHPChange;
 
     public class onPlayerHPChangeEventArgs : EventArgs
@@ -66,11 +68,24 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        if (Instance != null)
+        {
+            throw new System.Exception("Multiple instances of Player!");
+        }
+        Instance = this;
         Car.onCarShotDown += HandleCarShotDown;
         PlayerControls.OnMilestoneReached += HandleMilestoneReached;
         gameObject.GetComponent<HP>().OnHPChange += HandleHpChange;
         GameOverUI.onRestartClick += HandleRestartClick;
         ResetValues();
+    }
+
+    private void OnDestroy()
+    {
+        Car.onCarShotDown -= HandleCarShotDown;
+        PlayerControls.OnMilestoneReached -= HandleMilestoneReached;
+        gameObject.GetComponent<HP>().OnHPChange -= HandleHpChange;
+        GameOverUI.onRestartClick -= HandleRestartClick;
     }
 
     private void HandleRestartClick(object sender, System.EventArgs e)

@@ -6,6 +6,7 @@ using System;
 
 public class HP : MonoBehaviour
 {
+    public event EventHandler OnDeath;
     public event EventHandler<OnHPChangeEventArgs> OnHPChange;
 
     public class OnHPChangeEventArgs : EventArgs
@@ -46,10 +47,7 @@ public class HP : MonoBehaviour
         if (currentHP > 0)
             return;
 
-        if (gameObject.TryGetComponent<Car>(out Car car))
-        {
-            car.Explode(true);
-        }
+        OnDeath?.Invoke(this, new OnHPChangeEventArgs(currentHP));
     }
 
     public void Heal(int healAmount)

@@ -21,6 +21,18 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
+    public static event EventHandler<OnPlayerSawPoliceDestroyedEventArgs> OnPlayerSawPoliceDestroyed;
+
+    public class OnPlayerSawPoliceDestroyedEventArgs : EventArgs
+    {
+        public int milestone;
+
+        public OnPlayerSawPoliceDestroyedEventArgs(int milestone)
+        {
+            this.milestone = milestone;
+        }
+    }
+
     private float rotation = 0;
     private const float rotationSpeed = 40;
     private const float maxRotation = 30;
@@ -40,7 +52,14 @@ public class PlayerControls : MonoBehaviour
     private void Start()
     {
         GameOverUI.onRestartClick += HandleRestartClick;
+        PoliceCar.onPoliceCarDestroyed += HandlePoliceCarDestroyed;
         ResetPlayer();
+    }
+
+    private void OnDestroy()
+    {
+        GameOverUI.onRestartClick -= HandleRestartClick;
+        PoliceCar.onPoliceCarDestroyed -= HandlePoliceCarDestroyed;
     }
 
     private void Update()
@@ -133,6 +152,11 @@ public class PlayerControls : MonoBehaviour
     private void HandleRestartClick(object sender, System.EventArgs e)
     {
         ResetPlayer();
+    }
+
+    private void HandlePoliceCarDestroyed(object sender, System.EventArgs e)
+    {
+        OnPlayerSawPoliceDestroyed(this, new OnPlayerSawPoliceDestroyedEventArgs(milestone));
     }
 
     private void ResetPlayer()
