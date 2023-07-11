@@ -12,6 +12,7 @@ public static class Loader
         MainMenuScene,
         GameLoadingScene,
         GameScene,
+        TutorialScene,
     }
 
     private static ScenesEnum targetScene;

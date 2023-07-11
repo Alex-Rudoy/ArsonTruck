@@ -43,7 +43,6 @@ public class HP : MonoBehaviour
     {
         currentHP -= damage;
         OnHPChange?.Invoke(this, new OnHPChangeEventArgs(currentHP));
-        Debug.Log("HP: " + currentHP);
 
         if (currentHP > 0)
             return;

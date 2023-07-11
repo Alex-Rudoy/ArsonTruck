@@ -15,7 +15,14 @@ public class MainMenuUI : MonoBehaviour
     {
         startButton.onClick.AddListener(() =>
         {
-            Loader.LoadScene(Loader.ScenesEnum.GameScene);
+            if (PlayerPrefs.HasKey("tutorialPassed"))
+            {
+                Loader.LoadScene(Loader.ScenesEnum.GameScene);
+            }
+            else
+            {
+                Loader.LoadScene(Loader.ScenesEnum.TutorialScene);
+            }
         });
         exitButton.onClick.AddListener(() =>
         {
