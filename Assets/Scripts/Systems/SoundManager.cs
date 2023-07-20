@@ -10,9 +10,15 @@ public class SoundManager : MonoBehaviour
     {
         if (Instance != null)
         {
-            throw new System.Exception("SoundManager already exists!");
+            Destroy(this.gameObject);
+            return;
         }
         Instance = this;
+    }
+
+    private void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public void PlaySound(

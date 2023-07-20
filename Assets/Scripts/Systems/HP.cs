@@ -11,23 +11,23 @@ public class HP : MonoBehaviour
 
     public class OnHPChangeEventArgs : EventArgs
     {
-        public int HP;
+        public float HP;
 
-        public OnHPChangeEventArgs(int HP)
+        public OnHPChangeEventArgs(float HP)
         {
             this.HP = HP;
         }
     }
 
     [SerializeField]
-    private int maxHP;
+    private float maxHP;
 
-    public int MaxHP
+    public float MaxHP
     {
         get => maxHP;
     }
 
-    private int currentHP;
+    private float currentHP;
 
     private void Start()
     {

@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10dd9f612a3b412c9938c2c46152463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carHPUI: {fileID: 8009000736795575370}
+  HPUI: {fileID: 8009000736795575370}
   explosions:
   - {fileID: 110699291070103102}
   - {fileID: 8018259390394943404}
@@ -1042,7 +1042,7 @@ PrefabInstance:
     - target: {fileID: 2571340498076339071, guid: 7734d146ffd794c53a45b8c6d66e7ee4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3771218509683486165, guid: 7734d146ffd794c53a45b8c6d66e7ee4,
         type: 3}
@@ -1167,12 +1167,12 @@ PrefabInstance:
     - target: {fileID: 4270665314828396736, guid: 7734d146ffd794c53a45b8c6d66e7ee4,
         type: 3}
       propertyPath: m_Name
-      value: Car HP UI
+      value: Enemy HP UI
       objectReference: {fileID: 0}
     - target: {fileID: 6347620518820815111, guid: 7734d146ffd794c53a45b8c6d66e7ee4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6434812856026701178, guid: 7734d146ffd794c53a45b8c6d66e7ee4,
         type: 3}
@@ -1187,7 +1187,7 @@ PrefabInstance:
     - target: {fileID: 8518163446534100687, guid: 7734d146ffd794c53a45b8c6d66e7ee4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

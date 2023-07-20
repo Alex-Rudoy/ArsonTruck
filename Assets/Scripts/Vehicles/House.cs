@@ -19,7 +19,7 @@ public class House : MonoBehaviour
     }
 
     [SerializeField]
-    private CarHP carHPUI;
+    private EnemyHP HPUI;
 
     [SerializeField]
     private ParticleSystem[] explosions;
@@ -59,7 +59,7 @@ public class House : MonoBehaviour
         SoundManager.Instance.PlaySound(carExplosionSFXSO.audioClips, transform.position);
 
         gameObject.GetComponent<Collider>().enabled = false;
-        carHPUI.enabled = false;
+        HPUI.enabled = false;
 
         foreach (ParticleSystem explosion in explosions)
         {

@@ -20,7 +20,9 @@ public class PauseScreenUI : MonoBehaviour
     private void Awake()
     {
         resumeButton.onClick.AddListener(() => onResumeClick?.Invoke(this, System.EventArgs.Empty));
-        mainMenuButton.onClick.AddListener(() => Loader.LoadScene(Loader.ScenesEnum.MainMenuScene));
+        mainMenuButton.onClick.AddListener(
+            () => Loader.Instance.LoadScene(Loader.ScenesEnum.MainMenuScene)
+        );
     }
 
     private void Start()

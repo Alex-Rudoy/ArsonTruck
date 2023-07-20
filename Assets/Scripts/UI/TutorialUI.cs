@@ -37,7 +37,7 @@ public class TutorialUI : MonoBehaviour
             continueButton.onClick.AddListener(() =>
             {
                 PlayerPrefs.SetInt("tutorialPassed", 1);
-                Loader.LoadScene(Loader.ScenesEnum.GameScene);
+                Loader.Instance.LoadScene(Loader.ScenesEnum.GameScene);
             });
             return;
         }

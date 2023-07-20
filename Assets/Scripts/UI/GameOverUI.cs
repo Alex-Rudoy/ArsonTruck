@@ -12,17 +12,12 @@ public class GameOverUI : MonoBehaviour
     private TextMeshProUGUI gameOverText;
 
     [SerializeField]
-    private TextMeshProUGUI highScoreText;
-
-    [SerializeField]
     private Button restartButton;
 
     [SerializeField]
     private Button mainMenuButton;
 
     public static event EventHandler onRestartClick;
-
-    private int previousHighScore;
 
     private static bool isGameOver = false;
 
@@ -34,16 +29,15 @@ public class GameOverUI : MonoBehaviour
     private void Awake()
     {
         restartButton.onClick.AddListener(HandleRestartClick);
-        // restartButton.onClick.AddListener(() => Loader.LoadScene(Loader.ScenesEnum.GameScene));
-        mainMenuButton.onClick.AddListener(() => Loader.LoadScene(Loader.ScenesEnum.MainMenuScene));
+        mainMenuButton.onClick.AddListener(
+            () => Loader.Instance.LoadScene(Loader.ScenesEnum.MainMenuScene)
+        );
     }
 
     private void Start()
     {
         ui.SetActive(false);
-        highScoreText.gameObject.SetActive(false);
         Player.onGameOver += HandleGameOver;
-        previousHighScore = PlayerPrefs.GetInt("HighScore", 0);
     }
 
     private void OnDestroy()
@@ -57,18 +51,6 @@ public class GameOverUI : MonoBehaviour
         Time.timeScale = 0;
 
         gameOverText.text = e.message;
-
-        if (e.score > previousHighScore)
-        {
-            PlayerPrefs.SetInt("HighScore", e.score);
-            highScoreText.text = $"New High Score: {e.score}";
-            highScoreText.gameObject.SetActive(true);
-            previousHighScore = e.score;
-        }
-        else
-        {
-            highScoreText.gameObject.SetActive(false);
-        }
 
         ui.SetActive(true);
     }

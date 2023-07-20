@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CarHP : MonoBehaviour
+public class EnemyHP : MonoBehaviour
 {
     [SerializeField]
     HP carHpComponent;
@@ -29,28 +29,13 @@ public class CarHP : MonoBehaviour
 
     private void HandleHPChange(object sender, HP.OnHPChangeEventArgs e)
     {
-        if (e.HP < carHpComponent.MaxHP / 4 * 3)
-        {
-            if (!Flame1.gameObject.activeSelf)
-            {
-                Flame1.gameObject.SetActive(true);
-            }
-        }
+        float alpha1 = 1 - (e.HP / carHpComponent.MaxHP - 0.75f) * 4;
+        Flame1.color = new Color(1, 1, 1, alpha1);
 
-        if (e.HP < carHpComponent.MaxHP / 4 * 2)
-        {
-            if (!Flame2.gameObject.activeSelf)
-            {
-                Flame2.gameObject.SetActive(true);
-            }
-        }
+        float alpha2 = 1 - (e.HP / carHpComponent.MaxHP - 0.5f) * 4;
+        Flame2.color = new Color(1, 1, 1, alpha2);
 
-        if (e.HP < carHpComponent.MaxHP / 4)
-        {
-            if (!Flame3.gameObject.activeSelf)
-            {
-                Flame3.gameObject.SetActive(true);
-            }
-        }
+        float alpha3 = 1 - (e.HP / carHpComponent.MaxHP - 0.25f) * 4;
+        Flame3.color = new Color(1, 1, 1, alpha3);
     }
 }

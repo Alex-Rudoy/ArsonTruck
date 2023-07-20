@@ -9,12 +9,15 @@ public class FuelUI : MonoBehaviour
     [SerializeField]
     private Image fuelBar;
 
+    private Animator animator;
+
     private float targetFuel = 100;
 
     private void Start()
     {
         Player.onPlayerFuelChange += HandlePlayerFuelChange;
         GameOverUI.onRestartClick += HandleRestartClick;
+        animator = GetComponent<Animator>();
         ResetFuelBar();
     }
 
@@ -26,12 +29,15 @@ public class FuelUI : MonoBehaviour
 
     private void Update()
     {
-        fuelBar.fillAmount = Mathf.Lerp(fuelBar.fillAmount, targetFuel, Time.deltaTime * 5);
+        UpdateFillPercent(
+            Mathf.Lerp(fuelBar.material.GetFloat("_Fill_percent"), targetFuel, Time.deltaTime * 5)
+        );
     }
 
     private void HandlePlayerFuelChange(object sender, Player.onPlayerFuelChangeEventArgs e)
     {
         targetFuel = (float)e.fuel / 100;
+        animator.SetBool("IsLowFuel", targetFuel < 0.3);
     }
 
     private void HandleRestartClick(object sender, EventArgs e)
@@ -42,6 +48,11 @@ public class FuelUI : MonoBehaviour
     private void ResetFuelBar()
     {
         targetFuel = 100;
-        fuelBar.fillAmount = 1;
+        UpdateFillPercent(1);
+    }
+
+    private void UpdateFillPercent(float fillAmount)
+    {
+        fuelBar.material.SetFloat("_Fill_percent", fillAmount);
     }
 }

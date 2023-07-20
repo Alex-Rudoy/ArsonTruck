@@ -11,9 +11,9 @@ public class Player : MonoBehaviour
 
     public class onPlayerHPChangeEventArgs : EventArgs
     {
-        public int HP;
+        public float HP;
 
-        public onPlayerHPChangeEventArgs(int HP)
+        public onPlayerHPChangeEventArgs(float HP)
         {
             this.HP = HP;
         }

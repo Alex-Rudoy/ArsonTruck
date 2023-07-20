@@ -17,11 +17,11 @@ public class MainMenuUI : MonoBehaviour
         {
             if (PlayerPrefs.HasKey("tutorialPassed"))
             {
-                Loader.LoadScene(Loader.ScenesEnum.GameScene);
+                Loader.Instance.LoadScene(Loader.ScenesEnum.GameScene);
             }
             else
             {
-                Loader.LoadScene(Loader.ScenesEnum.TutorialScene);
+                Loader.Instance.LoadScene(Loader.ScenesEnum.TutorialScene);
             }
         });
         exitButton.onClick.AddListener(() =>
